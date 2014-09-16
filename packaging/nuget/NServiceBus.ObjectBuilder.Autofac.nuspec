@@ -21,6 +21,5 @@
   </metadata>
   <files>
     <file src="..\..\binaries\containers\autofac\NServiceBus.ObjectBuilder.Autofac.???" target="lib\net45" />
-    <file src="tools\install.ps1" target="tools" />
   </files>
 </package>
