@@ -55,7 +55,7 @@
     <Compile Include="App_Packages\NSB.ContainerTests.5.0.0-beta0007\When_registering_components.cs" />
     <Compile Include="App_Packages\NSB.ContainerTests.5.0.0-beta0007\When_releasing_components.cs" />
     <Compile Include="App_Packages\NSB.ContainerTests.5.0.0-beta0007\When_using_nested_containers.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="SetUpFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
