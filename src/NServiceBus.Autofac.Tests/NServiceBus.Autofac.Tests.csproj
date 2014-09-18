@@ -48,13 +48,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0-beta0007\TestContainerBuilder.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0-beta0007\When_building_components.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0-beta0007\When_disposing_the_builder.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0-beta0007\When_querying_for_registered_components.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0-beta0007\When_registering_components.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0-beta0007\When_releasing_components.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0-beta0007\When_using_nested_containers.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0\TestContainerBuilder.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0\When_building_components.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0\When_disposing_the_builder.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0\When_querying_for_registered_components.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0\When_registering_components.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0\When_releasing_components.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0\When_using_nested_containers.cs" />
     <Compile Include="SetUpFixture.cs" />
   </ItemGroup>
   <ItemGroup>

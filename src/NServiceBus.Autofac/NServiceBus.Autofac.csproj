@@ -54,8 +54,9 @@
       <HintPath>..\packages\Janitor.Fody.1.1.0.0\Lib\portable-net4+sl5+wp8+win8+wpa81+MonoAndroid16+MonoTouch40\Janitor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="NServiceBus.Core">
-      <HintPath>..\packages\NServiceBus.5.0.0-beta0005\lib\net45\NServiceBus.Core.dll</HintPath>
+    <Reference Include="NServiceBus.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NServiceBus.5.0.0\lib\net45\NServiceBus.Core.dll</HintPath>
     </Reference>
     <Reference Include="Obsolete">
       <HintPath>..\packages\Obsolete.Fody.3.1.0.0\Lib\NET35\Obsolete.dll</HintPath>

@@ -50,6 +50,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NServiceBus.Autofac\NServiceBus.Autofac.csproj">
+      <Project>{73ec4ebe-826d-4a0a-8837-51d3458fc2a8}</Project>
+      <Name>NServiceBus.Autofac</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="App_Packages\NSB.AcceptanceTests.5.0.0\Audit\When_a_message_is_audited.cs" />
     <Compile Include="App_Packages\NSB.AcceptanceTests.5.0.0\Audit\When_using_auditing_as_a_feature.cs" />
     <Compile Include="App_Packages\NSB.AcceptanceTests.5.0.0\Audit\When_using_audit_message_is_received.cs" />
@@ -157,15 +166,6 @@
     <Compile Include="App_Packages\NSB.AcceptanceTests.5.0.0\Tx\When_sending_within_an_ambient_transaction.cs" />
     <Compile Include="App_Packages\NSB.AcceptanceTests.5.0.0\Versioning\When_multiple_versions_of_a_message_is_published.cs" />
     <Compile Include="App_Packages\NSB.AcceptanceTests.5.0.0\Volatile\When_sending_to_non_durable_endpoint.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NServiceBus.Autofac\NServiceBus.Autofac.csproj">
-      <Project>{73ec4ebe-826d-4a0a-8837-51d3458fc2a8}</Project>
-      <Name>NServiceBus.Autofac</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
