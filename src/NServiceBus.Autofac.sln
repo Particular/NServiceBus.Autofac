@@ -10,11 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9EBDB2
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C6BB3A9F-6460-4521-AB7A-49B25AC4F742}"
-	ProjectSection(SolutionItems) = preProject
-		..\packaging\nuget\NServiceBus.ObjectBuilder.Autofac.nuspec = ..\packaging\nuget\NServiceBus.ObjectBuilder.Autofac.nuspec
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus.Autofac.AcceptanceTests", "NServiceBus.Autofac.AcceptanceTests\NServiceBus.Autofac.AcceptanceTests.csproj", "{1F6829BB-2B45-4A2D-9874-44DED5657FBB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus.Autofac.Tests", "NServiceBus.Autofac.Tests\NServiceBus.Autofac.Tests.csproj", "{22008780-552A-4047-95F5-A6C2BDB790B1}"

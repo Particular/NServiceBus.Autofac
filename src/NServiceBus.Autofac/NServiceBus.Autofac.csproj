@@ -74,6 +74,9 @@
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\packaging\nuget\NServiceBus.ObjectBuilder.Autofac.nuspec">
+      <Link>NServiceBus.ObjectBuilder.Autofac.nuspec</Link>
+    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
