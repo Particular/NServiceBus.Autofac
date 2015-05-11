@@ -7,18 +7,35 @@ namespace NServiceBus.ObjectBuilder.Autofac
     using global::Autofac;
     using global::Autofac.Builder;
     using global::Autofac.Core;
+    using NServiceBus.Settings;
 
-    class AutofacObjectBuilder : Common.IContainer
+	class AutofacObjectBuilder : Common.IContainer
     {
-        ILifetimeScope container;
+		ReadOnlySettings settings;
+		Func<ReadOnlySettings, ILifetimeScope> factory;
+		ILifetimeScope container;
 
-        public AutofacObjectBuilder(ILifetimeScope container)
-        {
-            this.container = container ?? new ContainerBuilder().Build();
+		private ILifetimeScope Container
+		{
+			get
+			{
+				if (factory != null)
+					return factory(settings) ?? container;
+
+				return container;
+			}
+		}
+
+		public AutofacObjectBuilder(ReadOnlySettings settings, ILifetimeScope container)
+		{
+			this.settings = settings;
+			this.container = container ?? new ContainerBuilder().Build();
+
+			settings.TryGet("ChildScopeContainerFactory", out factory);
         }
 
-        public AutofacObjectBuilder()
-            : this(null)
+        public AutofacObjectBuilder(ReadOnlySettings settings)
+			: this(settings, null)
         {
         }
 
@@ -29,17 +46,17 @@ namespace NServiceBus.ObjectBuilder.Autofac
 
         public Common.IContainer BuildChildContainer()
         {
-            return new AutofacObjectBuilder(container.BeginLifetimeScope());
+            return new AutofacObjectBuilder(settings, Container.BeginLifetimeScope());
         }
 
         public object Build(Type typeToBuild)
         {
-            return container.Resolve(typeToBuild);
+            return Container.Resolve(typeToBuild);
         }
 
         public IEnumerable<object> BuildAll(Type typeToBuild)
         {
-            return ResolveAll(container, typeToBuild);
+            return ResolveAll(Container, typeToBuild);
         }
 
         public void Configure(Type component, DependencyLifecycle dependencyLifecycle)
@@ -57,7 +74,7 @@ namespace NServiceBus.ObjectBuilder.Autofac
 
             SetLifetimeScope(dependencyLifecycle, registrationBuilder);
 
-            builder.Update(container.ComponentRegistry);
+            builder.Update(Container.ComponentRegistry);
         }
 
         public void Configure<T>(Func<T> componentFactory, DependencyLifecycle dependencyLifecycle)
@@ -75,7 +92,7 @@ namespace NServiceBus.ObjectBuilder.Autofac
 
             SetLifetimeScope(dependencyLifecycle, (IRegistrationBuilder<object, IConcreteActivatorData, SingleRegistrationStyle>) registrationBuilder);
 
-            builder.Update(container.ComponentRegistry);
+            builder.Update(Container.ComponentRegistry);
         }
 
         public void ConfigureProperty(Type component, string property, object value)
@@ -95,12 +112,12 @@ namespace NServiceBus.ObjectBuilder.Autofac
         {
             var builder = new ContainerBuilder();
             builder.RegisterInstance(instance).As(lookupType).PropertiesAutowired();
-            builder.Update(container.ComponentRegistry);
+			builder.Update(Container.ComponentRegistry);
         }
 
         public bool HasComponent(Type componentType)
         {
-            return container.IsRegistered(componentType);
+			return Container.IsRegistered(componentType);
         }
 
         public void Release(object instance)
@@ -134,7 +151,7 @@ namespace NServiceBus.ObjectBuilder.Autofac
 
         IComponentRegistration GetComponentRegistration(Type concreteComponent)
         {
-            return container.ComponentRegistry.Registrations.FirstOrDefault(x => x.Activator.LimitType == concreteComponent);
+			return Container.ComponentRegistry.Registrations.FirstOrDefault(x => x.Activator.LimitType == concreteComponent);
         }
 
         static IEnumerable<Type> GetAllServices(Type type)

@@ -21,10 +21,10 @@ namespace NServiceBus
 
             if (settings.TryGet("ExistingLifetimeScope", out existingLifetimeScope))
             {
-                return new AutofacObjectBuilder(existingLifetimeScope);
+                return new AutofacObjectBuilder(settings, existingLifetimeScope);
             }
 
-            return new AutofacObjectBuilder();
+            return new AutofacObjectBuilder(settings);
         }
     }
 }
