@@ -38,8 +38,9 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NServiceBus.Core">
-      <HintPath>..\packages\NServiceBus.5.0.0\lib\net45\NServiceBus.Core.dll</HintPath>
+    <Reference Include="NServiceBus.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NServiceBus.6.0.0-unstable0658\lib\net451\NServiceBus.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
@@ -53,13 +54,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0\TestContainerBuilder.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0\When_building_components.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0\When_disposing_the_builder.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0\When_querying_for_registered_components.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0\When_registering_components.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0\When_releasing_components.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.5.0.0\When_using_nested_containers.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-unstable0654\TestContainerBuilder.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-unstable0654\When_building_components.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-unstable0654\When_disposing_the_builder.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-unstable0654\When_querying_for_registered_components.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-unstable0654\When_registering_components.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-unstable0654\When_releasing_components.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-unstable0654\When_using_nested_containers.cs" />
     <Compile Include="SetUpFixture.cs" />
   </ItemGroup>
   <ItemGroup>
