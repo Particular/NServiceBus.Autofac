@@ -20,6 +20,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\binaries\NServiceBus.ObjectBuilder.Autofac.???" target="lib\net451" />
+    <file src="..\..\binaries\NServiceBus.ObjectBuilder.Autofac.???" target="lib\net452" />
   </files>
 </package>
