@@ -1,9 +1,11 @@
 namespace NServiceBus
 {
-    using Container;
+	using System;
+	using Container;
     using global::Autofac;
+	using NServiceBus.Settings;
 
-    /// <summary>
+	/// <summary>
     /// Autofac extension to pass an existing Autofac container instance.
     /// </summary>
     public static class AutofacExtensions
@@ -17,5 +19,16 @@ namespace NServiceBus
         {
             customizations.Settings.Set("ExistingLifetimeScope", lifetimeScope);
         }
-    }
+
+		/// <summary>
+		/// Use the pre-configured Autofac lifetime scope.
+		/// </summary>
+		/// <param name="customizations"></param>
+		/// <param name="factory">The factory that will retrieve the lifetime scope to use.</param>
+		public static void ChildScopeFactory(this ContainerCustomizations customizations,
+			Func<ReadOnlySettings, ILifetimeScope> factory)
+		{
+			customizations.Settings.Set("ChildScopeContainerFactory", factory);
+		}
+	}
 }
