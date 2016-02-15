@@ -7,6 +7,7 @@ namespace NServiceBus.ObjectBuilder.Autofac
     using global::Autofac;
     using global::Autofac.Builder;
     using global::Autofac.Core;
+    using global::Autofac.Core.Lifetime;
 
     class AutofacObjectBuilder : Common.IContainer
     {
@@ -44,6 +45,11 @@ namespace NServiceBus.ObjectBuilder.Autofac
 
         public void Configure(Type component, DependencyLifecycle dependencyLifecycle)
         {
+            if ((container is LifetimeScope) && (((LifetimeScope)container).ParentLifetimeScope != null))
+            {
+                throw new InvalidOperationException("Can't perform configurations on child containers");
+            }
+
             var registration = GetComponentRegistration(component);
 
             if (registration != null)
@@ -62,6 +68,11 @@ namespace NServiceBus.ObjectBuilder.Autofac
 
         public void Configure<T>(Func<T> componentFactory, DependencyLifecycle dependencyLifecycle)
         {
+            if ((container is LifetimeScope) && (((LifetimeScope)container).ParentLifetimeScope != null))
+            {
+                throw new InvalidOperationException("Can't perform configurations on child containers");
+            }
+
             var registration = GetComponentRegistration(typeof(T));
 
             if (registration != null)
@@ -80,6 +91,11 @@ namespace NServiceBus.ObjectBuilder.Autofac
 
         public void ConfigureProperty(Type component, string property, object value)
         {
+            if ((container is LifetimeScope) && (((LifetimeScope)container).ParentLifetimeScope != null))
+            {
+                throw new InvalidOperationException("Can't perform configurations on child containers");
+            }
+
             var registration = GetComponentRegistration(component);
 
             if (registration == null)
@@ -93,6 +109,11 @@ namespace NServiceBus.ObjectBuilder.Autofac
 
         public void RegisterSingleton(Type lookupType, object instance)
         {
+            if ((container is LifetimeScope) && (((LifetimeScope)container).ParentLifetimeScope != null))
+            {
+                throw new InvalidOperationException("Can't perform configurations on child containers");
+            }
+
             var builder = new ContainerBuilder();
             builder.RegisterInstance(instance).As(lookupType).PropertiesAutowired();
             builder.Update(container.ComponentRegistry);
