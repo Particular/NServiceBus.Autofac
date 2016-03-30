@@ -82,22 +82,7 @@ namespace NServiceBus.ObjectBuilder.Autofac
 
             builder.Update(container.ComponentRegistry);
         }
-
-        public void ConfigureProperty(Type component, string property, object value)
-        {
-            EnforceNotInChildContainer();
-
-            var registration = GetComponentRegistration(component);
-
-            if (registration == null)
-            {
-                var message = "Cannot configure properties for a type that hasn't been configured yet: " + component.FullName;
-                throw new InvalidOperationException(message);
-            }
-
-            registration.Activating += (sender, e) => SetPropertyValue(e.Instance, property, value);
-        }
-
+        
         public void RegisterSingleton(Type lookupType, object instance)
         {
             EnforceNotInChildContainer();
