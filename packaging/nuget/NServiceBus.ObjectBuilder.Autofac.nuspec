@@ -16,7 +16,7 @@
     <tags>nservicebus servicebus msmq cqrs publish subscribe</tags>
     <dependencies>
       <dependency id="NServiceBus" version="[5.0.0, 6.0.0)" />
-      <dependency id="Autofac" version="[3.5.2, 4.0.0)" />
+      <dependency id="Autofac" version="[4.0.0, 5.0.0)" />
     </dependencies>
   </metadata>
   <files>
