@@ -1,9 +1,9 @@
-﻿namespace NServiceBus.Autofac.AcceptanceTests
+﻿namespace NServiceBus.AcceptanceTests
 {
     using global::Autofac;
     using NServiceBus.AcceptanceTesting;
-    using NServiceBus.AcceptanceTests;
     using NServiceBus.AcceptanceTests.EndpointTemplates;
+    using NServiceBus.Autofac.AcceptanceTests;
     using NUnit.Framework;
 
     public class When_using_externally_owned_container : NServiceBusAcceptanceTest
@@ -33,13 +33,15 @@
             {
                 EndpointSetup<DefaultServer>(config =>
                 {
+                    Context = new Context();
+                    
                     var container = new ContainerBuilder().Build();
                     var scopeDecorator = new ScopeDecorator(container);
 
-                    config.UseContainer<AutofacBuilder>(c => c.ExistingLifetimeScope(scopeDecorator));
-
                     Context.Decorator = scopeDecorator;
                     Context.Scope = container;
+
+                    config.UseContainer<AutofacBuilder>(c => c.ExistingLifetimeScope(scopeDecorator));
                 });
             }
         }

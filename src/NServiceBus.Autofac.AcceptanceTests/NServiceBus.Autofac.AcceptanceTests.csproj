@@ -7,7 +7,7 @@
     <ProjectGuid>{1F6829BB-2B45-4A2D-9874-44DED5657FBB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NServiceBus.Autofac.AcceptanceTests</RootNamespace>
+    <RootNamespace>NServiceBus.AcceptanceTests</RootNamespace>
     <AssemblyName>NServiceBus.Autofac.AcceptanceTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
