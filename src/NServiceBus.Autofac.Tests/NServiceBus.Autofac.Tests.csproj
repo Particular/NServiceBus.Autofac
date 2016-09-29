@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.1.0\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NServiceBus.Core">
       <HintPath>..\packages\NServiceBus.5.0.0\lib\net45\NServiceBus.Core.dll</HintPath>
     </Reference>
@@ -56,6 +60,7 @@
     <Compile Include="App_Packages\NSB.ContainerTests.5.0.0\When_registering_components.cs" />
     <Compile Include="App_Packages\NSB.ContainerTests.5.0.0\When_releasing_components.cs" />
     <Compile Include="App_Packages\NSB.ContainerTests.5.0.0\When_using_nested_containers.cs" />
+    <Compile Include="DisposalTests.cs" />
     <Compile Include="SetUpFixture.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +71,9 @@
       <Project>{73EC4EBE-826D-4A0A-8837-51D3458FC2A8}</Project>
       <Name>NServiceBus.Autofac</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

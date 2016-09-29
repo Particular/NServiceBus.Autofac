@@ -11,15 +11,31 @@ namespace NServiceBus.ObjectBuilder.Autofac
     class AutofacObjectBuilder : Common.IContainer
     {
         ILifetimeScope container;
+        private bool owned;
+
+        public AutofacObjectBuilder(ILifetimeScope container, bool owned)
+        {
+            this.owned = owned;
+            this.container = container;
+        }
 
         public AutofacObjectBuilder(ILifetimeScope container)
+            : this(container, false)
         {
-            this.container = container ?? new ContainerBuilder().Build();
         }
 
         public AutofacObjectBuilder()
-            : this(null)
+            : this(new ContainerBuilder().Build(), true)
         {
+        }
+
+        void DisposeManaged()
+        {
+            if (!owned)
+            {
+                return;
+            }
+            container?.Dispose();
         }
 
         public void Dispose()
@@ -29,7 +45,7 @@ namespace NServiceBus.ObjectBuilder.Autofac
 
         public Common.IContainer BuildChildContainer()
         {
-            return new AutofacObjectBuilder(container.BeginLifetimeScope());
+            return new AutofacObjectBuilder(container.BeginLifetimeScope(), true);
         }
 
         public object Build(Type typeToBuild)
@@ -73,7 +89,7 @@ namespace NServiceBus.ObjectBuilder.Autofac
             var services = GetAllServices(typeof(T)).ToArray();
             var registrationBuilder = builder.Register(c => componentFactory.Invoke()).As(services).PropertiesAutowired();
 
-            SetLifetimeScope(dependencyLifecycle, (IRegistrationBuilder<object, IConcreteActivatorData, SingleRegistrationStyle>) registrationBuilder);
+            SetLifetimeScope(dependencyLifecycle, (IRegistrationBuilder<object, IConcreteActivatorData, SingleRegistrationStyle>)registrationBuilder);
 
             builder.Update(container.ComponentRegistry);
         }
