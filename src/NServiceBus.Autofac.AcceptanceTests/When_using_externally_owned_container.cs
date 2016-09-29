@@ -1,6 +1,5 @@
 ﻿namespace NServiceBus.Autofac.AcceptanceTests
 {
-    using System.Threading.Tasks;
     using global::Autofac;
     using NServiceBus.AcceptanceTesting;
     using NServiceBus.AcceptanceTests;
