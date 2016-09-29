@@ -50,6 +50,10 @@
       <HintPath>..\packages\ApprovalUtilities.3.0.11\lib\net45\ApprovalUtilities.Net45.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Autofac, Version=4.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.1.0\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Mono.Cecil, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\Mono.Cecil.0.9.6.1\lib\net45\Mono.Cecil.dll</HintPath>
       <Private>True</Private>
@@ -93,6 +97,7 @@
     <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-rc0001\When_querying_for_registered_components.cs" />
     <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-rc0001\When_registering_components.cs" />
     <Compile Include="App_Packages\NSB.ContainerTests.6.0.0-rc0001\When_using_nested_containers.cs" />
+    <Compile Include="DisposalTests.cs" />
     <Compile Include="SetUpFixture.cs" />
   </ItemGroup>
   <ItemGroup>

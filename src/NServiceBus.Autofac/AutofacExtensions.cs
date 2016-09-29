@@ -1,7 +1,7 @@
 namespace NServiceBus
 {
     using Container;
-    using global::Autofac;
+    using Autofac;
 
     /// <summary>
     /// Autofac extension to pass an existing Autofac container instance.
@@ -15,7 +15,7 @@ namespace NServiceBus
         /// <param name="lifetimeScope">The existing lifetime scope to use.</param>
         public static void ExistingLifetimeScope(this ContainerCustomizations customizations, ILifetimeScope lifetimeScope)
         {
-            customizations.Settings.Set("ExistingLifetimeScope", lifetimeScope);
+            customizations.Settings.Set<AutofacBuilder.LifetimeScopeHolder>(new AutofacBuilder.LifetimeScopeHolder(lifetimeScope));
         }
     }
 }
