@@ -7,6 +7,7 @@ namespace NServiceBus.ObjectBuilder.Autofac
     using global::Autofac;
     using global::Autofac.Builder;
     using global::Autofac.Core;
+    using global::Autofac.Core.Lifetime;
 
     class AutofacObjectBuilder : Common.IContainer
     {
@@ -29,6 +30,11 @@ namespace NServiceBus.ObjectBuilder.Autofac
         {
         }
 
+        public void Dispose()
+        {
+            //Injected at compile time
+        }
+
         void DisposeManaged()
         {
             if (!owned)
@@ -36,11 +42,6 @@ namespace NServiceBus.ObjectBuilder.Autofac
                 return;
             }
             container?.Dispose();
-        }
-
-        public void Dispose()
-        {
-            //Injected at compile time
         }
 
         public Common.IContainer BuildChildContainer()
@@ -60,6 +61,8 @@ namespace NServiceBus.ObjectBuilder.Autofac
 
         public void Configure(Type component, DependencyLifecycle dependencyLifecycle)
         {
+            EnforceNotInChildContainer();
+
             var registration = GetComponentRegistration(component);
 
             if (registration != null)
@@ -78,6 +81,8 @@ namespace NServiceBus.ObjectBuilder.Autofac
 
         public void Configure<T>(Func<T> componentFactory, DependencyLifecycle dependencyLifecycle)
         {
+            EnforceNotInChildContainer();
+
             var registration = GetComponentRegistration(typeof(T));
 
             if (registration != null)
@@ -89,26 +94,15 @@ namespace NServiceBus.ObjectBuilder.Autofac
             var services = GetAllServices(typeof(T)).ToArray();
             var registrationBuilder = builder.Register(c => componentFactory.Invoke()).As(services).PropertiesAutowired();
 
-            SetLifetimeScope(dependencyLifecycle, (IRegistrationBuilder<object, IConcreteActivatorData, SingleRegistrationStyle>)registrationBuilder);
+            SetLifetimeScope(dependencyLifecycle, (IRegistrationBuilder<object, IConcreteActivatorData, SingleRegistrationStyle>) registrationBuilder);
 
             builder.Update(container.ComponentRegistry);
         }
 
-        public void ConfigureProperty(Type component, string property, object value)
-        {
-            var registration = GetComponentRegistration(component);
-
-            if (registration == null)
-            {
-                var message = "Cannot configure properties for a type that hasn't been configured yet: " + component.FullName;
-                throw new InvalidOperationException(message);
-            }
-
-            registration.Activating += (sender, e) => SetPropertyValue(e.Instance, property, value);
-        }
-
         public void RegisterSingleton(Type lookupType, object instance)
         {
+            EnforceNotInChildContainer();
+
             var builder = new ContainerBuilder();
             builder.RegisterInstance(instance).As(lookupType).PropertiesAutowired();
             builder.Update(container.ComponentRegistry);
@@ -176,6 +170,14 @@ namespace NServiceBus.ObjectBuilder.Autofac
         static IEnumerable<object> ResolveAll(IComponentContext container, Type componentType)
         {
             return container.Resolve(typeof(IEnumerable<>).MakeGenericType(componentType)) as IEnumerable<object>;
+        }
+
+        private void EnforceNotInChildContainer()
+        {
+            if ((container as LifetimeScope)?.ParentLifetimeScope != null)
+            {
+                throw new InvalidOperationException("Can't perform configurations on child containers");
+            }
         }
     }
 }
