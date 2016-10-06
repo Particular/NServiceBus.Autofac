@@ -1,7 +1,7 @@
 namespace NServiceBus
 {
     using Container;
-    using global::Autofac;
+    using Autofac;
     using ObjectBuilder.Autofac;
     using Settings;
 
@@ -17,14 +17,24 @@ namespace NServiceBus
         /// <returns>The new container wrapper.</returns>
         public override ObjectBuilder.Common.IContainer CreateContainer(ReadOnlySettings settings)
         {
-            ILifetimeScope existingLifetimeScope;
+            LifetimeScopeHolder scopeHolder;
 
-            if (settings.TryGet("ExistingLifetimeScope", out existingLifetimeScope))
+            if (settings.TryGet(out scopeHolder))
             {
-                return new AutofacObjectBuilder(existingLifetimeScope);
+                return new AutofacObjectBuilder(scopeHolder.ExistingLifetimeScope);
             }
 
             return new AutofacObjectBuilder();
+        }
+
+        internal class LifetimeScopeHolder
+        {
+            public LifetimeScopeHolder(ILifetimeScope lifetimeScope)
+            {
+                ExistingLifetimeScope = lifetimeScope;
+            }
+
+            public ILifetimeScope ExistingLifetimeScope { get; }
         }
     }
 }
