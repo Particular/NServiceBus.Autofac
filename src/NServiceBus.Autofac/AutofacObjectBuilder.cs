@@ -61,8 +61,6 @@ namespace NServiceBus.ObjectBuilder.Autofac
 
         public void Configure(Type component, DependencyLifecycle dependencyLifecycle)
         {
-            EnforceNotInChildContainer();
-
             var registration = GetComponentRegistration(component);
 
             if (registration != null)
@@ -81,8 +79,6 @@ namespace NServiceBus.ObjectBuilder.Autofac
 
         public void Configure<T>(Func<T> componentFactory, DependencyLifecycle dependencyLifecycle)
         {
-            EnforceNotInChildContainer();
-
             var registration = GetComponentRegistration(typeof(T));
 
             if (registration != null)
@@ -101,8 +97,6 @@ namespace NServiceBus.ObjectBuilder.Autofac
 
         public void RegisterSingleton(Type lookupType, object instance)
         {
-            EnforceNotInChildContainer();
-
             var builder = new ContainerBuilder();
             builder.RegisterInstance(instance).As(lookupType).PropertiesAutowired();
             builder.Update(container.ComponentRegistry);
@@ -170,14 +164,6 @@ namespace NServiceBus.ObjectBuilder.Autofac
         static IEnumerable<object> ResolveAll(IComponentContext container, Type componentType)
         {
             return container.Resolve(typeof(IEnumerable<>).MakeGenericType(componentType)) as IEnumerable<object>;
-        }
-
-        private void EnforceNotInChildContainer()
-        {
-            if ((container as LifetimeScope)?.ParentLifetimeScope != null)
-            {
-                throw new InvalidOperationException("Can't perform configurations on child containers");
-            }
         }
     }
 }
