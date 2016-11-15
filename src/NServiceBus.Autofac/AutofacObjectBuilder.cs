@@ -7,26 +7,32 @@ namespace NServiceBus.ObjectBuilder.Autofac
     using global::Autofac;
     using global::Autofac.Builder;
     using global::Autofac.Core;
-    using global::Autofac.Core.Lifetime;
 
     class AutofacObjectBuilder : Common.IContainer
     {
         ILifetimeScope container;
-        private bool owned;
+        bool owned;
+        bool isChild;
 
-        public AutofacObjectBuilder(ILifetimeScope container, bool owned)
+        AutofacObjectBuilder(ILifetimeScope container, bool owned, bool isChild)
         {
             this.owned = owned;
+            this.isChild = isChild;
             this.container = container;
         }
 
+        public AutofacObjectBuilder(ILifetimeScope container, bool owned)
+            : this(container, owned, false)
+        {
+        }
+
         public AutofacObjectBuilder(ILifetimeScope container)
-            : this(container, false)
+            : this(container, false, false)
         {
         }
 
         public AutofacObjectBuilder()
-            : this(new ContainerBuilder().Build(), true)
+            : this(new ContainerBuilder().Build(), true, false)
         {
         }
 
@@ -46,7 +52,7 @@ namespace NServiceBus.ObjectBuilder.Autofac
 
         public Common.IContainer BuildChildContainer()
         {
-            return new AutofacObjectBuilder(container.BeginLifetimeScope(), true);
+            return new AutofacObjectBuilder(container.BeginLifetimeScope(), true, true);
         }
 
         public object Build(Type typeToBuild)
@@ -174,7 +180,7 @@ namespace NServiceBus.ObjectBuilder.Autofac
 
         private void EnforceNotInChildContainer()
         {
-            if ((container as LifetimeScope)?.ParentLifetimeScope != null)
+            if (isChild)
             {
                 throw new InvalidOperationException("Can't perform configurations on child containers");
             }
