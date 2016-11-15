@@ -1,7 +1,7 @@
 ﻿namespace NServiceBus.Autofac.AcceptanceTests
 {
     using System.Threading.Tasks;
-    using AcceptanceTesting;
+    using NServiceBus.AcceptanceTesting;
     using NServiceBus.AcceptanceTests;
     using NServiceBus.AcceptanceTests.EndpointTemplates;
     using NUnit.Framework;

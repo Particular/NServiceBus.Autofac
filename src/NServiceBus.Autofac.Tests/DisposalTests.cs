@@ -6,7 +6,7 @@
     using global::Autofac.Core;
     using global::Autofac.Core.Lifetime;
     using global::Autofac.Core.Resolving;
-    using ObjectBuilder.Autofac;
+    using NServiceBus.ObjectBuilder.Autofac;
     using NUnit.Framework;
 
     [TestFixture]

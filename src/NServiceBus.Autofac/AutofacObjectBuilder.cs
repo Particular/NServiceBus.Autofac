@@ -7,32 +7,26 @@ namespace NServiceBus.ObjectBuilder.Autofac
     using global::Autofac;
     using global::Autofac.Builder;
     using global::Autofac.Core;
+    using global::Autofac.Core.Lifetime;
 
     class AutofacObjectBuilder : Common.IContainer
     {
         ILifetimeScope container;
         private bool owned;
-        private bool isChild;
 
-        AutofacObjectBuilder(ILifetimeScope container, bool owned, bool isChild)
+        public AutofacObjectBuilder(ILifetimeScope container, bool owned)
         {
-            this.isChild = isChild;
             this.owned = owned;
             this.container = container;
         }
 
         public AutofacObjectBuilder(ILifetimeScope container)
-            : this(container, false, false)
-        {
-        }
-
-        public AutofacObjectBuilder(ILifetimeScope container, bool owned)
-            : this(container, owned, false)
+            : this(container, false)
         {
         }
 
         public AutofacObjectBuilder()
-            : this(new ContainerBuilder().Build(), true, false)
+            : this(new ContainerBuilder().Build(), true)
         {
         }
 
@@ -52,7 +46,7 @@ namespace NServiceBus.ObjectBuilder.Autofac
 
         public Common.IContainer BuildChildContainer()
         {
-            return new AutofacObjectBuilder(container.BeginLifetimeScope(), true, true);
+            return new AutofacObjectBuilder(container.BeginLifetimeScope(), true);
         }
 
         public object Build(Type typeToBuild)
@@ -153,14 +147,6 @@ namespace NServiceBus.ObjectBuilder.Autofac
             return container.ComponentRegistry.Registrations.FirstOrDefault(x => x.Activator.LimitType == concreteComponent);
         }
 
-        private void EnforceNotInChildContainer()
-        {
-            if (isChild)
-            {
-                throw new InvalidOperationException("Can't perform configurations on child containers");
-            }
-        }
-
         static IEnumerable<Type> GetAllServices(Type type)
         {
             if (type == null)
@@ -184,6 +170,14 @@ namespace NServiceBus.ObjectBuilder.Autofac
         static IEnumerable<object> ResolveAll(IComponentContext container, Type componentType)
         {
             return container.Resolve(typeof(IEnumerable<>).MakeGenericType(componentType)) as IEnumerable<object>;
+        }
+
+        private void EnforceNotInChildContainer()
+        {
+            if ((container as LifetimeScope)?.ParentLifetimeScope != null)
+            {
+                throw new InvalidOperationException("Can't perform configurations on child containers");
+            }
         }
     }
 }
