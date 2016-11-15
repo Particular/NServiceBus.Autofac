@@ -7,7 +7,6 @@ namespace NServiceBus.ObjectBuilder.Autofac
     using global::Autofac;
     using global::Autofac.Builder;
     using global::Autofac.Core;
-    using global::Autofac.Core.Lifetime;
 
     class AutofacObjectBuilder : Common.IContainer
     {
