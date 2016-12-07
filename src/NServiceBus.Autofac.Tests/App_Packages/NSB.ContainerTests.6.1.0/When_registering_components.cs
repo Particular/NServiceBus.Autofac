@@ -44,8 +44,6 @@ namespace NServiceBus.ContainerTests
 
                 Assert.IsInstanceOf<AnotherSingletonComponent>(builder.Build(typeof(ISingletonComponent)));
             }
-
-            //Not supported by, typeof(SpringObjectBuilder));
         }
 
         [Test]
@@ -80,8 +78,6 @@ namespace NServiceBus.ContainerTests
                 Assert.AreEqual(builder.Build(typeof(ISingleton1)), singleton);
                 Assert.AreEqual(builder.Build(typeof(ISingleton2)), singleton);
             }
-
-            //Not supported by,typeof(SpringObjectBuilder));
         }
 
         [Test]
@@ -89,7 +85,7 @@ namespace NServiceBus.ContainerTests
         {
             using (var builder = TestContainerBuilder.ConstructBuilder())
             {
-                builder.Configure(typeof(SomeClass), DependencyLifecycle.InstancePerCall);
+                builder.Configure(typeof(SomeClass), DependencyLifecycle.SingleInstance);
                 builder.Configure(typeof(ClassWithSetterDependencies), DependencyLifecycle.SingleInstance);
 
                 var component = (ClassWithSetterDependencies)builder.Build(typeof(IWithSetterDependencies));
@@ -105,7 +101,7 @@ namespace NServiceBus.ContainerTests
         {
             using (var builder = TestContainerBuilder.ConstructBuilder())
             {
-                builder.Configure(typeof(SomeClass), DependencyLifecycle.InstancePerCall);
+                builder.Configure(typeof(SomeClass), DependencyLifecycle.SingleInstance);
                 builder.Configure(typeof(ClassWithSetterDependencies), DependencyLifecycle.SingleInstance);
 
                 var component = (ClassWithSetterDependencies)builder.Build(typeof(ClassWithSetterDependencies));
@@ -175,7 +171,6 @@ namespace NServiceBus.ContainerTests
                     Assert.AreEqual(2, childBuilder.BuildAll(typeof(ISomeInterface)).Count());
                 }
             }
-            //Not supported by,typeof(WindsorObjectBuilder));
         }
 
         [Test]
