@@ -17,7 +17,6 @@
                 {
                     if (reg.Activator is ProvidedInstanceActivator)
                     {
-                        var activator = reg.Activator as ProvidedInstanceActivator;
                         foreach (TypedService service in reg.Services)
                         {
                             var registration = builder.RegisterInstance(container.Resolve(service.ServiceType)).As(service.ServiceType).PropertiesAutowired();

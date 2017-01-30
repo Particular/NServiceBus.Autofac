@@ -3,10 +3,8 @@ namespace NServiceBus.ObjectBuilder.Autofac
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
     using global::Autofac;
     using global::Autofac.Builder;
-    using global::Autofac.Core;
 
     class AutofacObjectBuilder : Common.IContainer
     {
@@ -50,12 +48,7 @@ namespace NServiceBus.ObjectBuilder.Autofac
             (builder as ParentBuilder)?.parentScope?.Dispose();
         }
 
-        public Common.IContainer BuildChildContainer()
-        {
-            var childScope = Container.BeginLifetimeScope();
-
-            return new AutofacObjectBuilder(childScope.CreateBuilderFromContainer(true), true, true);
-        }
+        public Common.IContainer BuildChildContainer() => new AutofacObjectBuilder(Container.BeginLifetimeScope().CreateBuilderFromContainer(true), true, true);
 
         public object Build(Type typeToBuild)
         {
@@ -168,7 +161,7 @@ namespace NServiceBus.ObjectBuilder.Autofac
             return container.Resolve(typeof(IEnumerable<>).MakeGenericType(componentType)) as IEnumerable<object>;
         }
 
-        private void EnforceNotInChildContainer()
+        void EnforceNotInChildContainer()
         {
             if (isChild)
             {
