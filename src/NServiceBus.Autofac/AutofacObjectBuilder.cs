@@ -22,6 +22,7 @@ namespace NServiceBus.ObjectBuilder.Autofac
     {
         ContainerBuilder builder;
         ILifetimeScope container;
+        HashSet<Type> registeredTypes;
         bool owned;
         bool isChild;
 
@@ -30,6 +31,8 @@ namespace NServiceBus.ObjectBuilder.Autofac
             this.owned = owned;
             this.isChild = isChild;
             this.builder = builder;
+
+            registeredTypes = new HashSet<Type>();
         }
 
         public AutofacObjectBuilder(ILifetimeScope container, bool owned)
@@ -68,11 +71,8 @@ namespace NServiceBus.ObjectBuilder.Autofac
                 return;
             }
             container?.Dispose();
-            
-            if (!isChild)
-            {
-                (builder as ParentBuilder)?.parentScope?.Dispose();
-            }
+
+            (builder as ParentBuilder)?.parentScope?.Dispose();
         }
 
         public Common.IContainer BuildChildContainer()
@@ -101,12 +101,19 @@ namespace NServiceBus.ObjectBuilder.Autofac
                 return;
             }
 
-            EnsureInBuildMode();
-
             var services = GetAllServices(component).ToArray();
             var registrationBuilder = builder.RegisterType(component).As(services).PropertiesAutowired();
 
+            AddServicesToRegisteredTypes(services);
             SetLifetimeScope(dependencyLifecycle, registrationBuilder);
+        }
+
+        void AddServicesToRegisteredTypes(params Type[] services)
+        {
+            foreach (var svc in services)
+            {
+                registeredTypes.Add(svc);
+            }
         }
 
         public void Configure<T>(Func<T> componentFactory, DependencyLifecycle dependencyLifecycle)
@@ -118,10 +125,10 @@ namespace NServiceBus.ObjectBuilder.Autofac
                 return;
             }
 
-            EnsureInBuildMode();
-
             var services = GetAllServices(typeof(T)).ToArray();
             var registrationBuilder = builder.Register(c => componentFactory.Invoke()).As(services).PropertiesAutowired();
+
+            AddServicesToRegisteredTypes(services);
 
             SetLifetimeScope(dependencyLifecycle, (IRegistrationBuilder<object, IConcreteActivatorData, SingleRegistrationStyle>) registrationBuilder);
         }
@@ -130,42 +137,17 @@ namespace NServiceBus.ObjectBuilder.Autofac
         {
             EnforceNotInChildContainer();
 
-            EnsureInBuildMode();
-
+            AddServicesToRegisteredTypes(lookupType);
             builder.RegisterInstance(instance).As(lookupType).PropertiesAutowired();
         }
 
         public bool HasComponent(Type componentType)
         {
-            // This is a problem as we can't check a builder's registrations
-            // so we are forced to build a container to check if a type has
-            // been registered.
-            return Container.IsRegistered(componentType);
+            return registeredTypes.Contains(componentType);
         }
 
         public void Release(object instance)
         {
-        }
-
-        void EnsureInBuildMode()
-        {
-            if (IsBuilt)
-            {
-                builder = container.CreateBuilderFromContainer(isChild);
-                container = null;
-            }
-        }
-
-        bool IsBuilt
-        {
-            get { return container != null; }
-        }
-
-        static void SetPropertyValue(object instance, string propertyName, object value)
-        {
-            instance.GetType()
-                .GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance)
-                .SetValue(instance, value, null);
         }
 
         static void SetLifetimeScope(DependencyLifecycle dependencyLifecycle, IRegistrationBuilder<object, IConcreteActivatorData, SingleRegistrationStyle> registrationBuilder)
@@ -184,11 +166,6 @@ namespace NServiceBus.ObjectBuilder.Autofac
                 default:
                     throw new ArgumentException("Unhandled lifecycle - " + dependencyLifecycle);
             }
-        }
-
-        IComponentRegistration GetComponentRegistration(Type concreteComponent)
-        {
-            return Container.ComponentRegistry.Registrations.FirstOrDefault(x => x.Activator.LimitType == concreteComponent);
         }
 
         static IEnumerable<Type> GetAllServices(Type type)

@@ -1,11 +1,7 @@
 ﻿namespace NServiceBus.Autofac.Tests
 {
     using System;
-    using System.Collections.Generic;
     using global::Autofac;
-    using global::Autofac.Core;
-    using global::Autofac.Core.Lifetime;
-    using global::Autofac.Core.Resolving;
     using NUnit.Framework;
     using ObjectBuilder.Autofac;
 
