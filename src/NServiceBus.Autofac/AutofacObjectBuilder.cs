@@ -10,10 +10,9 @@ namespace NServiceBus.ObjectBuilder.Autofac
     {
         readonly ContainerBuilder builder;
         readonly HashSet<Type> registeredTypes;
-
-        Lazy<ILifetimeScope> container;
-        bool owned;
-        bool isChild;
+        readonly Lazy<ILifetimeScope> container;
+        readonly bool owned;
+        readonly bool isChild;
 
         public AutofacObjectBuilder(ContainerBuilder builder, bool owned, bool isChild)
         {
@@ -45,7 +44,7 @@ namespace NServiceBus.ObjectBuilder.Autofac
                 container.Value.Dispose();
             }
 
-            (builder as ParentBuilder)?.parentScope?.Dispose();
+            (builder as ParentBuilder)?.ParentScope?.Dispose();
         }
 
         public Common.IContainer BuildChildContainer() => new AutofacObjectBuilder(Container.BeginLifetimeScope().CreateBuilderFromContainer(true), true, true);
