@@ -21,10 +21,10 @@ namespace NServiceBus
 
             if (settings.TryGet(out scopeHolder))
             {
-                return new AutofacObjectBuilder(scopeHolder.ExistingLifetimeScope);
+                return new AutofacObjectBuilder(scopeHolder.ExistingLifetimeScope.CreateBuilderFromContainer(false), false, false);
             }
 
-            return new AutofacObjectBuilder();
+            return new AutofacObjectBuilder(new ContainerBuilder(), true, false);
         }
 
         internal class LifetimeScopeHolder

@@ -3,38 +3,30 @@ namespace NServiceBus.ObjectBuilder.Autofac
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
     using global::Autofac;
     using global::Autofac.Builder;
-    using global::Autofac.Core;
 
     class AutofacObjectBuilder : Common.IContainer
     {
-        ILifetimeScope container;
+        readonly ContainerBuilder builder;
+        readonly HashSet<Type> registeredTypes;
+
+        Lazy<ILifetimeScope> container;
         bool owned;
         bool isChild;
 
-        AutofacObjectBuilder(ILifetimeScope container, bool owned, bool isChild)
+        public AutofacObjectBuilder(ContainerBuilder builder, bool owned, bool isChild)
         {
             this.owned = owned;
             this.isChild = isChild;
-            this.container = container;
+            this.builder = builder;
+
+            this.container = new Lazy<ILifetimeScope>(() => builder.Build());
+
+            registeredTypes = new HashSet<Type>();
         }
 
-        public AutofacObjectBuilder(ILifetimeScope container, bool owned)
-            : this(container, owned, false)
-        {
-        }
-
-        public AutofacObjectBuilder(ILifetimeScope container)
-            : this(container, false, false)
-        {
-        }
-
-        public AutofacObjectBuilder()
-            : this(new ContainerBuilder().Build(), true, false)
-        {
-        }
+        public ILifetimeScope Container => container.Value;
 
         public void Dispose()
         {
@@ -47,87 +39,83 @@ namespace NServiceBus.ObjectBuilder.Autofac
             {
                 return;
             }
-            container?.Dispose();
+
+            if (container.IsValueCreated)
+            {
+                container.Value.Dispose();
+            }
+
+            (builder as ParentBuilder)?.parentScope?.Dispose();
         }
 
-        public Common.IContainer BuildChildContainer()
-        {
-            return new AutofacObjectBuilder(container.BeginLifetimeScope(), true, true);
-        }
+        public Common.IContainer BuildChildContainer() => new AutofacObjectBuilder(Container.BeginLifetimeScope().CreateBuilderFromContainer(true), true, true);
 
         public object Build(Type typeToBuild)
         {
-            return container.Resolve(typeToBuild);
+            return Container.Resolve(typeToBuild);
         }
 
         public IEnumerable<object> BuildAll(Type typeToBuild)
         {
-            return ResolveAll(container, typeToBuild);
+            return ResolveAll(Container, typeToBuild);
         }
 
         public void Configure(Type component, DependencyLifecycle dependencyLifecycle)
         {
             EnforceNotInChildContainer();
 
-            var registration = GetComponentRegistration(component);
-
-            if (registration != null)
+            if (HasComponent(component))
             {
                 return;
             }
 
-            var builder = new ContainerBuilder();
             var services = GetAllServices(component).ToArray();
             var registrationBuilder = builder.RegisterType(component).As(services).PropertiesAutowired();
 
+            AddServicesToRegisteredTypes(services);
             SetLifetimeScope(dependencyLifecycle, registrationBuilder);
+        }
 
-            builder.Update(container.ComponentRegistry);
+        void AddServicesToRegisteredTypes(params Type[] services)
+        {
+            foreach (var svc in services)
+            {
+                registeredTypes.Add(svc);
+            }
         }
 
         public void Configure<T>(Func<T> componentFactory, DependencyLifecycle dependencyLifecycle)
         {
             EnforceNotInChildContainer();
 
-            var registration = GetComponentRegistration(typeof(T));
-
-            if (registration != null)
+            if (HasComponent(typeof(T)))
             {
                 return;
             }
 
-            var builder = new ContainerBuilder();
             var services = GetAllServices(typeof(T)).ToArray();
             var registrationBuilder = builder.Register(c => componentFactory.Invoke()).As(services).PropertiesAutowired();
 
-            SetLifetimeScope(dependencyLifecycle, (IRegistrationBuilder<object, IConcreteActivatorData, SingleRegistrationStyle>) registrationBuilder);
+            AddServicesToRegisteredTypes(services);
 
-            builder.Update(container.ComponentRegistry);
+            SetLifetimeScope(dependencyLifecycle, (IRegistrationBuilder<object, IConcreteActivatorData, SingleRegistrationStyle>) registrationBuilder);
         }
 
         public void RegisterSingleton(Type lookupType, object instance)
         {
             EnforceNotInChildContainer();
 
-            var builder = new ContainerBuilder();
+            AddServicesToRegisteredTypes(lookupType);
             builder.RegisterInstance(instance).As(lookupType).PropertiesAutowired();
-            builder.Update(container.ComponentRegistry);
         }
 
         public bool HasComponent(Type componentType)
         {
-            return container.IsRegistered(componentType);
+            return registeredTypes.Contains(componentType);
         }
 
         public void Release(object instance)
         {
-        }
-
-        static void SetPropertyValue(object instance, string propertyName, object value)
-        {
-            instance.GetType()
-                .GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance)
-                .SetValue(instance, value, null);
         }
 
         static void SetLifetimeScope(DependencyLifecycle dependencyLifecycle, IRegistrationBuilder<object, IConcreteActivatorData, SingleRegistrationStyle> registrationBuilder)
@@ -146,11 +134,6 @@ namespace NServiceBus.ObjectBuilder.Autofac
                 default:
                     throw new ArgumentException("Unhandled lifecycle - " + dependencyLifecycle);
             }
-        }
-
-        IComponentRegistration GetComponentRegistration(Type concreteComponent)
-        {
-            return container.ComponentRegistry.Registrations.FirstOrDefault(x => x.Activator.LimitType == concreteComponent);
         }
 
         static IEnumerable<Type> GetAllServices(Type type)
@@ -178,7 +161,7 @@ namespace NServiceBus.ObjectBuilder.Autofac
             return container.Resolve(typeof(IEnumerable<>).MakeGenericType(componentType)) as IEnumerable<object>;
         }
 
-        private void EnforceNotInChildContainer()
+        void EnforceNotInChildContainer()
         {
             if (isChild)
             {

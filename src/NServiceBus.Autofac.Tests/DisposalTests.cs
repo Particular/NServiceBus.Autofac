@@ -17,7 +17,7 @@
         {
             var fakeScope = new FakeLifetimeScope();
 
-            var container = new AutofacObjectBuilder(fakeScope, true);
+            var container = new AutofacObjectBuilder(fakeScope.CreateBuilderFromContainer(false), true, false);
             container.Dispose();
 
             Assert.True(fakeScope.Disposed);
@@ -28,7 +28,7 @@
         {
             var fakeScope = new FakeLifetimeScope();
 
-            var container = new AutofacObjectBuilder(fakeScope, false);
+            var container = new AutofacObjectBuilder(fakeScope.CreateBuilderFromContainer(false), false, false);
             container.Dispose();
 
             Assert.False(fakeScope.Disposed);
@@ -75,17 +75,17 @@
             public event EventHandler<LifetimeScopeEndingEventArgs> CurrentScopeEnding;
             public event EventHandler<ResolveOperationBeginningEventArgs> ResolveOperationBeginning;
 
-            private void OnChildLifetimeScopeBeginning(LifetimeScopeBeginningEventArgs e)
+            void OnChildLifetimeScopeBeginning(LifetimeScopeBeginningEventArgs e)
             {
                 ChildLifetimeScopeBeginning?.Invoke(this, e);
             }
 
-            private void OnCurrentScopeEnding(LifetimeScopeEndingEventArgs e)
+            void OnCurrentScopeEnding(LifetimeScopeEndingEventArgs e)
             {
                 CurrentScopeEnding?.Invoke(this, e);
             }
 
-            private void OnResolveOperationBeginning(ResolveOperationBeginningEventArgs e)
+            void OnResolveOperationBeginning(ResolveOperationBeginningEventArgs e)
             {
                 ResolveOperationBeginning?.Invoke(this, e);
             }
