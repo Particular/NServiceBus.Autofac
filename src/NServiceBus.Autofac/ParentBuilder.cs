@@ -4,11 +4,11 @@
 
     class ParentBuilder : ContainerBuilder
     {
-        public ILifetimeScope parentScope { get; }
+        public ILifetimeScope ParentScope { get; }
 
         public ParentBuilder(ILifetimeScope parentScope)
         {
-            this.parentScope = parentScope;
+            this.ParentScope = parentScope;
         }
     }
 }

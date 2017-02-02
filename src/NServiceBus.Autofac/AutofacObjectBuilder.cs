@@ -45,7 +45,7 @@ namespace NServiceBus.ObjectBuilder.Autofac
                 container.Value.Dispose();
             }
 
-            (builder as ParentBuilder)?.parentScope?.Dispose();
+            (builder as ParentBuilder)?.ParentScope?.Dispose();
         }
 
         public Common.IContainer BuildChildContainer() => new AutofacObjectBuilder(Container.BeginLifetimeScope().CreateBuilderFromContainer(true), true, true);
