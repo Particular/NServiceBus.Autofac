@@ -10,10 +10,9 @@ namespace NServiceBus.ObjectBuilder.Autofac
     {
         readonly ContainerBuilder builder;
         readonly HashSet<Type> registeredTypes;
-
-        Lazy<ILifetimeScope> container;
-        bool owned;
-        bool isChild;
+        readonly Lazy<ILifetimeScope> container;
+        readonly bool owned;
+        readonly bool isChild;
 
         public AutofacObjectBuilder(ContainerBuilder builder, bool owned, bool isChild)
         {
