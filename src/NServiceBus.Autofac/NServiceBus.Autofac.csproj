@@ -78,6 +78,7 @@
     <Compile Include="AutofacObjectBuilder.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="ILifetimeScopeExtensionMethods.cs" />
+    <Compile Include="ParentBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\packaging\nuget\NServiceBus.Autofac.nuspec">

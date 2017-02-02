@@ -8,56 +8,27 @@ namespace NServiceBus.ObjectBuilder.Autofac
     using global::Autofac.Builder;
     using global::Autofac.Core;
 
-    class ParentBuilder : ContainerBuilder
-    {
-        public ILifetimeScope parentScope;
-
-        public ParentBuilder(ILifetimeScope parentScope)
-        {
-            this.parentScope = parentScope;
-        }
-    }
-
     class AutofacObjectBuilder : Common.IContainer
     {
-        ContainerBuilder builder;
-        ILifetimeScope container;
-        HashSet<Type> registeredTypes;
+        readonly ContainerBuilder builder;
+        readonly HashSet<Type> registeredTypes;
+
+        Lazy<ILifetimeScope> container;
         bool owned;
         bool isChild;
 
-        AutofacObjectBuilder(ContainerBuilder builder, bool owned, bool isChild)
+        public AutofacObjectBuilder(ContainerBuilder builder, bool owned, bool isChild)
         {
             this.owned = owned;
             this.isChild = isChild;
             this.builder = builder;
 
+            this.container = new Lazy<ILifetimeScope>(() => builder.Build());
+
             registeredTypes = new HashSet<Type>();
         }
 
-        public AutofacObjectBuilder(ILifetimeScope container, bool owned)
-            : this(container.CreateBuilderFromContainer(false), owned, false)
-        {
-        }
-
-        public AutofacObjectBuilder(ILifetimeScope container)
-            : this(container.CreateBuilderFromContainer(false), false, false)
-        {
-        }
-
-        public AutofacObjectBuilder()
-            : this(new ContainerBuilder(), true, false)
-        {
-        }
-
-        public ILifetimeScope Container
-        {
-            get
-            {
-                container = container ?? builder.Build();
-                return container;
-            }
-        }
+        public ILifetimeScope Container => container.Value;
 
         public void Dispose()
         {
@@ -70,7 +41,11 @@ namespace NServiceBus.ObjectBuilder.Autofac
             {
                 return;
             }
-            container?.Dispose();
+
+            if (container.IsValueCreated)
+            {
+                container.Value.Dispose();
+            }
 
             (builder as ParentBuilder)?.parentScope?.Dispose();
         }

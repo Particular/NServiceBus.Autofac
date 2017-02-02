@@ -17,7 +17,7 @@
         {
             var fakeScope = new FakeLifetimeScope();
 
-            var container = new AutofacObjectBuilder(fakeScope, true);
+            var container = new AutofacObjectBuilder(fakeScope.CreateBuilderFromContainer(false), true, false);
             container.Dispose();
 
             Assert.True(fakeScope.Disposed);
@@ -28,7 +28,7 @@
         {
             var fakeScope = new FakeLifetimeScope();
 
-            var container = new AutofacObjectBuilder(fakeScope, false);
+            var container = new AutofacObjectBuilder(fakeScope.CreateBuilderFromContainer(false), false, false);
             container.Dispose();
 
             Assert.False(fakeScope.Disposed);
