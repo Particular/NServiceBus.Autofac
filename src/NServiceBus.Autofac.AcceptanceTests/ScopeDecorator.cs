@@ -70,6 +70,6 @@
             remove { decorated.ResolveOperationBeginning -= value; }
         }
 
-        readonly ILifetimeScope decorated;
+        private readonly ILifetimeScope decorated;
     }
 }

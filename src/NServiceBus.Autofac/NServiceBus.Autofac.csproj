@@ -52,8 +52,8 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.4.3.0\lib\net45\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=4.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.2.0\lib\net45\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Janitor, Version=1.2.1.0, Culture=neutral, PublicKeyToken=d34c7d3bba3746e6, processorArchitecture=MSIL">
@@ -77,8 +77,6 @@
     <Compile Include="AutofacExtensions.cs" />
     <Compile Include="AutofacObjectBuilder.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="ILifetimeScopeExtensionMethods.cs" />
-    <Compile Include="ParentBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\packaging\nuget\NServiceBus.Autofac.nuspec">
