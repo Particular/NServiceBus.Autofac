@@ -7,6 +7,7 @@ public class SetUpFixture
 {
     public SetUpFixture()
     {
-        TestContainerBuilder.ConstructBuilder = () => new AutofacObjectBuilder(new Autofac.ContainerBuilder(), true, false);
+        TestContainerBuilder.ConstructBuilder = () => new AutofacObjectBuilder();
     }
+
 }
