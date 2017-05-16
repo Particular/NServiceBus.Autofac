@@ -38,6 +38,8 @@
 
                     config.UseContainer<AutofacBuilder>(c => c.ExistingLifetimeScope(scopeDecorator));
 
+                    config.SendFailedMessagesTo("error");
+
                     var context = (Context) desc.ScenarioContext;
                     context.Decorator = scopeDecorator;
                     context.Scope = container;

@@ -29,7 +29,11 @@
         {
             public Endpoint()
             {
-                EndpointSetup<DefaultServer>(config => config.RegisterComponents(c => c.ConfigureComponent<MyPropDependency>(DependencyLifecycle.SingleInstance)));
+                EndpointSetup<DefaultServer>(config =>
+                {
+                    config.RegisterComponents(c => c.ConfigureComponent<MyPropDependency>(DependencyLifecycle.SingleInstance));
+                    config.SendFailedMessagesTo("error");
+                });
             }
 
             public class MyMessageHandler : IHandleMessages<MyMessage>
