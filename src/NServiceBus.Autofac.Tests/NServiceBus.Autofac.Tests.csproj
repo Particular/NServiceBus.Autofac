@@ -50,9 +50,8 @@
       <HintPath>..\packages\ApprovalUtilities.3.0.11\lib\net45\ApprovalUtilities.Net45.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Autofac, Version=4.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.4.2.0\lib\net45\Autofac.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Autofac, Version=4.6.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.6.0\lib\net45\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\Mono.Cecil.0.9.6.1\lib\net45\Mono.Cecil.dll</HintPath>
@@ -71,12 +70,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="NServiceBus.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NServiceBus.6.1.0\lib\net452\NServiceBus.Core.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\NServiceBus.6.2.1\lib\net452\NServiceBus.Core.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=3.2.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.2.1\lib\net45\nunit.framework.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -91,16 +88,17 @@
     <Compile Include="ApprovalTestConfig.cs" />
     <Compile Include="App_Packages\ApiApprover.3.0.1\PublicApiApprover.cs" />
     <Compile Include="App_Packages\ApiApprover.3.0.1\PublicApiGenerator.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.6.1.0\TestContainerBuilder.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.6.1.0\When_building_components.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.6.1.0\When_disposing_the_builder.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.6.1.0\When_querying_for_registered_components.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.6.1.0\When_registering_components.cs" />
-    <Compile Include="App_Packages\NSB.ContainerTests.6.1.0\When_using_nested_containers.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.6.2.1\TestContainerBuilder.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.6.2.1\When_building_components.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.6.2.1\When_disposing_the_builder.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.6.2.1\When_querying_for_registered_components.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.6.2.1\When_registering_components.cs" />
+    <Compile Include="App_Packages\NSB.ContainerTests.6.2.1\When_using_nested_containers.cs" />
     <Compile Include="DisposalTests.cs" />
     <Compile Include="SetUpFixture.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

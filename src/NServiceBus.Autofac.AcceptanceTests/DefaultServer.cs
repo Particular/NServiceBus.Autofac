@@ -24,8 +24,10 @@
             this.typesToInclude = typesToInclude;
         }
 
+#pragma warning disable CS0618
         public Task<EndpointConfiguration> GetConfiguration(RunDescriptor runDescriptor, EndpointCustomizationConfiguration endpointConfiguration, IConfigurationSource configSource, Action<EndpointConfiguration> configurationBuilderCustomization)
         {
+#pragma warning restore CS0618
             var types = GetTypesScopedByTestClass(endpointConfiguration);
 
             typesToInclude.AddRange(types);
