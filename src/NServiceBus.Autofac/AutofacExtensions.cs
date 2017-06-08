@@ -1,7 +1,7 @@
 namespace NServiceBus
 {
     using Container;
-    using Autofac;
+    using global::Autofac;
 
     /// <summary>
     /// Autofac extension to pass an existing Autofac container instance.

@@ -1,7 +1,7 @@
 namespace NServiceBus
 {
     using Container;
-    using Autofac;
+    using global::Autofac;
     using ObjectBuilder.Autofac;
     using Settings;
 
