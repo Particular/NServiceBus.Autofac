@@ -10,7 +10,8 @@
     <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>$(ProjectDir)bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <OutputPath>..\..\binaries\</OutputPath>
     <NoWarn>CS0419</NoWarn>
     <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
     <RootNamespace>NServiceBus.ObjectBuilder.Autofac</RootNamespace>
@@ -24,15 +25,7 @@
     <PackageReference Include="NuGetPackager" Version="0.6.3" />
     <PackageReference Include="Fody" Version="2.1.0" />
     <PackageReference Include="GitVersionTask" Version="4.0.0-beta0012" />
-    <None Include="..\..\packaging\nuget\NServiceBus.Autofac.nuspec">
-      <Link>NServiceBus.Autofac.nuspec</Link>
-    </None>
+    <None Include="..\..\GitVersion.yml" Link="GitVersion.yml" />
+    <None Include="..\..\packaging\nuget\NServiceBus.Autofac.nuspec" />
   </ItemGroup>
-  <Target Name="BeforeBuildPackages" BeforeTargets="BuildPackages">
-    <MakeDir Directories="$(SolutionDir)..\binaries" />
-    <ItemGroup>
-      <Files Include="$(TargetDir)$(TargetName).*" />
-    </ItemGroup>
-    <Copy SourceFiles="@(Files)" DestinationFolder="$(SolutionDir)..\binaries" />
-  </Target>
 </Project>
