@@ -26,6 +26,6 @@
     <PackageReference Include="Fody" Version="2.1.0" />
     <PackageReference Include="GitVersionTask" Version="4.0.0-beta0012" />
     <None Include="..\..\GitVersion.yml" Link="GitVersion.yml" />
-    <None Include="..\..\packaging\nuget\NServiceBus.Autofac.nuspec" />
+    <None Include="..\..\packaging\nuget\NServiceBus.Autofac.nuspec" Link="NServiceBus.Autofac.nuspec" />
   </ItemGroup>
 </Project>
