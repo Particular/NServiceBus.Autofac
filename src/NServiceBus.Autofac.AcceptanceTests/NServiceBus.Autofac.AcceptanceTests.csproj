@@ -7,7 +7,7 @@
     <NoWarn>PCR0001</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.6.0" />
+    <PackageReference Include="Autofac" Version="4.6.1" />
     <PackageReference Include="NServiceBus.AcceptanceTesting" Version="6.3.3" />
     <PackageReference Include="NServiceBus" Version="6.3.3" />
     <PackageReference Include="NUnit" Version="3.7.1" />
