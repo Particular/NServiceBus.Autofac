@@ -8,7 +8,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.6.1" />
-    <PackageReference Include="NServiceBus.AcceptanceTesting" Version="6.3.3" />
+    <PackageReference Include="NServiceBus.AcceptanceTesting" Version="7.0.0-alpharelease0051" />
     <PackageReference Include="NServiceBus" Version="7.0.0-alpharelease0051" />
     <PackageReference Include="NUnit" Version="3.7.1" />
     <ProjectReference Include="..\NServiceBus.Autofac\NServiceBus.Autofac.csproj" />
