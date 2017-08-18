@@ -16,16 +16,18 @@
     <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
     <RootNamespace>NServiceBus.ObjectBuilder.Autofac</RootNamespace>
   </PropertyGroup>
+  <PropertyGroup>
+    <Description>Adapter for the Autofac IoC Container</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.0.0" />
-    <PackageReference Include="Janitor.Fody" Version="1.4.1" />
-    <PackageReference Include="NServiceBus" Version="6.0.0" />
-    <PackageReference Include="Obsolete.Fody" Version="4.2.2" />
+    <PackageReference Include="Janitor.Fody" Version="1.5.1" />
+    <PackageReference Include="NServiceBus" Version="7.0.0-alpharelease0051" />
+    <PackageReference Include="Obsolete.Fody" Version="4.2.4" />
     <PackageReference Include="Particular.CodeRules" Version="0.2.0" />
-    <PackageReference Include="NuGetPackager" Version="0.6.3" />
-    <PackageReference Include="Fody" Version="2.1.0" />
+    <PackageReference Include="Fody" Version="2.1.2" />
     <PackageReference Include="GitVersionTask" Version="4.0.0-beta0012" />
     <None Include="..\..\GitVersion.yml" Link="GitVersion.yml" />
-    <None Include="..\..\packaging\nuget\NServiceBus.Autofac.nuspec" Link="NServiceBus.Autofac.nuspec" />
   </ItemGroup>
 </Project>
