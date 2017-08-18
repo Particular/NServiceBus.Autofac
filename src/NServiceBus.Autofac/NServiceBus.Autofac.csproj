@@ -27,7 +27,6 @@
     <PackageReference Include="Obsolete.Fody" Version="4.2.4" />
     <PackageReference Include="Particular.CodeRules" Version="0.2.0" />
     <PackageReference Include="Fody" Version="2.1.2" />
-    <PackageReference Include="GitVersionTask" Version="4.0.0-beta0012" />
     <None Include="..\..\GitVersion.yml" Link="GitVersion.yml" />
   </ItemGroup>
 </Project>
