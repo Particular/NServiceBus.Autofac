@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
     <AssemblyName>NServiceBus.ObjectBuilder.Autofac</AssemblyName>
-    <NuSpecFileName>NServiceBus.Autofac</NuSpecFileName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(SolutionDir)NServiceBus.snk</AssemblyOriginatorKeyFile>
@@ -19,6 +18,7 @@
   <PropertyGroup>
     <Description>Adapter for the Autofac IoC Container</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>NServiceBus.Autofac</PackageId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.0.0" />
