@@ -3,14 +3,13 @@
   <PropertyGroup>
     <TargetFramework>net452</TargetFramework>
     <DebugSymbols>True</DebugSymbols>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>PCR0001</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.6.1" />
-    <PackageReference Include="NServiceBus.AcceptanceTesting" Version="7.0.0-alpharelease0051" />
-    <PackageReference Include="NServiceBus" Version="7.0.0-alpharelease0051" />
-    <PackageReference Include="NUnit" Version="3.7.1" />
+    <PackageReference Include="Autofac" Version="4.*" />
+    <PackageReference Include="NServiceBus.AcceptanceTesting" Version="7.0.0-*" />
+    <PackageReference Include="NServiceBus" Version="7.0.0-*" />
+    <PackageReference Include="NUnit" Version="3.*" />
     <ProjectReference Include="..\NServiceBus.Autofac\NServiceBus.Autofac.csproj" />
   </ItemGroup>
 </Project>
