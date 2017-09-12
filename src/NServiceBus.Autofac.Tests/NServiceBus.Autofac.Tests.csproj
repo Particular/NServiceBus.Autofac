@@ -2,8 +2,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net452;netcoreapp2.0</TargetFrameworks>
-    <DebugType>full</DebugType>
-    <DebugSymbols>True</DebugSymbols>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
     <SignAssembly>true</SignAssembly>
