@@ -17,11 +17,12 @@
     <PackageId>NServiceBus.Autofac</PackageId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="[4.0.0, 5.0.0)" />
-    <PackageReference Include="Janitor.Fody" Version="1.*" PrivateAssets="All" />
-    <PackageReference Include="NServiceBus" Version="[7.0.0-*, 8.0.0)" />
-    <PackageReference Include="Particular.CodeRules" Version="0.2.0" PrivateAssets="All" />
+    <PackageReference Include="Autofac" Version="[4.0.0,5.0.0)" />
+    <PackageReference Include="NServiceBus" Version="[7.0.0-*,8.0.0)" />
+    <PackageReference Include="Particular.CodeRules" Version="0.2.0" PrivateAssets="all" />
     <PackageReference Include="Fody" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Janitor.Fody" Version="1.5.1" PrivateAssets="All" />
+    <PackageReference Include="Obsolete.Fody" Version="4.2.4" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\GitVersion.yml" Link="GitVersion.yml" />
