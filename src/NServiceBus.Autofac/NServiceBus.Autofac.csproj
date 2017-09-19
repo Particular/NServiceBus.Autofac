@@ -5,7 +5,6 @@
     <AssemblyName>NServiceBus.ObjectBuilder.Autofac</AssemblyName>
     <RootNamespace>NServiceBus.ObjectBuilder.Autofac</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
     <SignAssembly>true</SignAssembly>
