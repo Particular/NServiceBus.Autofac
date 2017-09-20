@@ -13,7 +13,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <Description>Adapter for the Autofac IoC Container</Description>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>NServiceBus.Autofac</PackageId>
   </PropertyGroup>
   <ItemGroup>
