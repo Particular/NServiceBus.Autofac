@@ -1,9 +1,9 @@
 <Project>
 
-  <PropertyGroup>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-  </PropertyGroup>
-  
+  <ItemGroup>
+    <PackageReference Include="Terrajobst.PlatformCompat.Analyzers" Version="0.0.95-alpha" PrivateAssets="All" />
+  </ItemGroup>
+
   <!-- Workaround for GitVersion 4.0 not creating GitVersionInformation by default -->
   <PropertyGroup>
     <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
@@ -14,7 +14,7 @@
 
   <!-- Versioning workaround because of https://github.com/NuGet/Home/issues/4790 -->
   <PropertyGroup>
-    <GitVersionTaskVersion>4.0.0-*</GitVersionTaskVersion>
+    <GitVersionTaskVersion>4.0.0-beta0012</GitVersionTaskVersion>
   </PropertyGroup>
 
   <ItemGroup>
