@@ -14,3 +14,11 @@ namespace NServiceBus
         public static void ExistingLifetimeScope(this NServiceBus.Container.ContainerCustomizations customizations, Autofac.ILifetimeScope lifetimeScope) { }
     }
 }
+namespace NServiceBus.Features
+{
+    public class AutofacDiagnostics : NServiceBus.Features.Feature
+    {
+        public AutofacDiagnostics() { }
+        protected override void Setup(NServiceBus.Features.FeatureConfigurationContext context) { }
+    }
+}
