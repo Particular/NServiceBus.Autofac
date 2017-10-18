@@ -1,13 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 15.0.26430.12
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus.Autofac", "NServiceBus.Autofac\NServiceBus.Autofac.csproj", "{73EC4EBE-826D-4A0A-8837-51D3458FC2A8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus.Autofac.AcceptanceTests", "NServiceBus.Autofac.AcceptanceTests\NServiceBus.Autofac.AcceptanceTests.csproj", "{1F6829BB-2B45-4A2D-9874-44DED5657FBB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus.Autofac.Tests", "NServiceBus.Autofac.Tests\NServiceBus.Autofac.Tests.csproj", "{22008780-552A-4047-95F5-A6C2BDB790B1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DCE0C1CA-F21E-468F-B681-599B6FC9EE6C}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		..\GitVersion.yml = ..\GitVersion.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

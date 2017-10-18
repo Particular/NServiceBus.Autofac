@@ -1,28 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
     <AssemblyName>NServiceBus.ObjectBuilder.Autofac</AssemblyName>
     <RootNamespace>NServiceBus.ObjectBuilder.Autofac</RootNamespace>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(SolutionDir)NServiceBus.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+
   <PropertyGroup>
     <Description>Adapter for the Autofac IoC Container</Description>
     <PackageId>NServiceBus.Autofac</PackageId>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Autofac" Version="[4.0.0,5.0.0)" />
     <PackageReference Include="NServiceBus" Version="[7.0.0-*,8.0.0)" />
-    <PackageReference Include="Particular.CodeRules" Version="*" PrivateAssets="all" />
     <PackageReference Include="Fody" Version="2.*" PrivateAssets="All" />
     <PackageReference Include="Janitor.Fody" Version="1.*" PrivateAssets="All" />
+    <PackageReference Include="Particular.CodeRules" Version="*" PrivateAssets="All" />
+    <PackageReference Include="Particular.Packaging" Version="0.1.0" PrivateAssets="All" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\GitVersion.yml" Link="GitVersion.yml" />
-  </ItemGroup>
+
 </Project>
