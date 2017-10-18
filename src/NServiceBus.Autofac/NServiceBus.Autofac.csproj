@@ -5,7 +5,6 @@
     <AssemblyName>NServiceBus.ObjectBuilder.Autofac</AssemblyName>
     <RootNamespace>NServiceBus.ObjectBuilder.Autofac</RootNamespace>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(SolutionDir)NServiceBus.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
@@ -21,6 +20,7 @@
     <PackageReference Include="Fody" Version="2.*" PrivateAssets="All" />
     <PackageReference Include="Janitor.Fody" Version="1.*" PrivateAssets="All" />
     <PackageReference Include="Particular.CodeRules" Version="*" PrivateAssets="All" />
+    <PackageReference Include="Particular.Packaging" Version="0.1.0" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>
