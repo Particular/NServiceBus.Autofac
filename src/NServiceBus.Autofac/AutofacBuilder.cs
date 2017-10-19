@@ -21,8 +21,18 @@ namespace NServiceBus
 
             if (settings.TryGet(out scopeHolder))
             {
+                settings.AddStartupDiagnosticsSection("NServiceBus.Autofac", new
+                {
+                    UsingExistingLifetimeScope = true
+                });
+
                 return new AutofacObjectBuilder(scopeHolder.ExistingLifetimeScope);
             }
+
+            settings.AddStartupDiagnosticsSection("NServiceBus.Autofac", new
+            {
+                UsingExistingLifetimeScope = false
+            });
 
             return new AutofacObjectBuilder();
         }
