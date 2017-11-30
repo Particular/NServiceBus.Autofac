@@ -1,12 +1,12 @@
-﻿using System;
+﻿#if NET452
+using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
-using ApiApprover;
 using ApprovalTests;
-using Mono.Cecil;
-using NServiceBus;
 using NUnit.Framework;
+using PublicApiGenerator;
 
 [TestFixture]
 public class APIApprovals
@@ -15,10 +15,9 @@ public class APIApprovals
     [MethodImpl(MethodImplOptions.NoInlining)]
     public void Approve()
     {
-        Directory.SetCurrentDirectory(TestContext.CurrentContext.TestDirectory);
-        var assemblyPath = Path.GetFullPath(typeof(AutofacBuilder).Assembly.Location);
-        var asm = AssemblyDefinition.ReadAssembly(assemblyPath);
-        var publicApi = Filter(PublicApiGenerator.CreatePublicApiForAssembly(asm));
+        var combine = Path.Combine(TestContext.CurrentContext.TestDirectory, "NServiceBus.ObjectBuilder.Autofac.dll");
+        var assembly = Assembly.LoadFile(combine);
+        var publicApi = Filter(ApiGenerator.GeneratePublicApi(assembly));
         Approvals.Verify(publicApi);
     }
 
@@ -32,5 +31,5 @@ public class APIApprovals
             .Where(l => !string.IsNullOrWhiteSpace(l))
             );
     }
-
 }
+#endif

@@ -1,6 +1,4 @@
-﻿using ApprovalTests.Reporters;
-#if(DEBUG)
+﻿#if NET452
+using ApprovalTests.Reporters;
 [assembly: UseReporter(typeof(DiffReporter), typeof(AllFailingTestsClipboardReporter))]
-#else
-[assembly: UseReporter(typeof(DiffReporter))]
 #endif
