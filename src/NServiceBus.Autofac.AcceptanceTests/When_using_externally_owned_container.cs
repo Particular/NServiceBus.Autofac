@@ -2,7 +2,7 @@
 {
     using System.Threading.Tasks;
     using global::Autofac;
-    using NServiceBus.AcceptanceTesting;
+    using AcceptanceTesting;
     using NServiceBus.AcceptanceTests;
     using NServiceBus.AcceptanceTests.EndpointTemplates;
     using NUnit.Framework;
@@ -37,6 +37,8 @@
                     var scopeDecorator = new ScopeDecorator(container);
 
                     config.UseContainer<AutofacBuilder>(c => c.ExistingLifetimeScope(scopeDecorator));
+
+                    config.SendFailedMessagesTo("error");
 
                     var context = (Context) desc.ScenarioContext;
                     context.Decorator = scopeDecorator;

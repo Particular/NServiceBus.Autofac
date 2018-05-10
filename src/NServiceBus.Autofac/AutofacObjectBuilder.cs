@@ -11,8 +11,8 @@ namespace NServiceBus.ObjectBuilder.Autofac
     class AutofacObjectBuilder : Common.IContainer
     {
         ILifetimeScope container;
-        bool owned;
-        bool isChild;
+        readonly bool isChild;
+        readonly bool owned;
 
         AutofacObjectBuilder(ILifetimeScope container, bool owned, bool isChild)
         {
