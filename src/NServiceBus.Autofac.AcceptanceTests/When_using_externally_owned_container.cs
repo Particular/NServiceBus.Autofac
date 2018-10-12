@@ -2,7 +2,7 @@
 {
     using System.Threading.Tasks;
     using global::Autofac;
-    using NServiceBus.AcceptanceTesting;
+    using AcceptanceTesting;
     using NServiceBus.AcceptanceTests;
     using NServiceBus.AcceptanceTests.EndpointTemplates;
     using NUnit.Framework;
