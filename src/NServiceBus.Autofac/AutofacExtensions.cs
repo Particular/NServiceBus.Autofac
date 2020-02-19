@@ -6,6 +6,10 @@ namespace NServiceBus
     /// <summary>
     /// Autofac extension to pass an existing Autofac container instance.
     /// </summary>
+    [ObsoleteEx(
+         Message = "Support for Autofac is provided via the NServiceBus.Extensions.DependencyInjection package.",
+         RemoveInVersion = "8.0.0",
+         TreatAsErrorFromVersion = "7.0.0")]
     public static class AutofacExtensions
     {
         /// <summary>

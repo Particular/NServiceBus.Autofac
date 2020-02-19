@@ -8,6 +8,10 @@ namespace NServiceBus
     /// <summary>
     /// Autofac Container
     /// </summary>
+    [ObsoleteEx(
+          Message = "Support for Autofac is provided via the NServiceBus.Extensions.DependencyInjection package.",
+          RemoveInVersion = "8.0.0",
+          TreatAsErrorFromVersion = "7.0.0")]
     public class AutofacBuilder : ContainerDefinition
     {
         /// <summary>
