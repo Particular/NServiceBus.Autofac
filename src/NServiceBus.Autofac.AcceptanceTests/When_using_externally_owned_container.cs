@@ -35,9 +35,9 @@
                 {
                     var container = new ContainerBuilder().Build();
                     var scopeDecorator = new ScopeDecorator(container);
-
+#pragma warning disable 0618
                     config.UseContainer<AutofacBuilder>(c => c.ExistingLifetimeScope(scopeDecorator));
-
+#pragma warning restore 0618
                     config.SendFailedMessagesTo("error");
 
                     var context = (Context) desc.ScenarioContext;
