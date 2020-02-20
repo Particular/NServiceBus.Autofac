@@ -8,8 +8,8 @@ namespace NServiceBus
     /// </summary>
     [ObsoleteEx(
          Message = "Support for Autofac is provided via the NServiceBus.Extensions.DependencyInjection package.",
-         RemoveInVersion = "8.0.0",
-         TreatAsErrorFromVersion = "7.0.0")]
+         RemoveInVersion = "9.0.0",
+         TreatAsErrorFromVersion = "8.0.0")]
     public static class AutofacExtensions
     {
         /// <summary>

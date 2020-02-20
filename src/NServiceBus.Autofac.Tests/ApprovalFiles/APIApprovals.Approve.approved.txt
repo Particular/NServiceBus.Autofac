@@ -4,14 +4,14 @@
 namespace NServiceBus
 {
     [ObsoleteExAttribute(Message="Support for Autofac is provided via the NServiceBus.Extensions.DependencyInjectio" +
-        "n package.", RemoveInVersion="8.0.0", TreatAsErrorFromVersion="7.0.0")]
+        "n package.", RemoveInVersion="9.0.0", TreatAsErrorFromVersion="8.0.0")]
     public class AutofacBuilder : NServiceBus.Container.ContainerDefinition
     {
         public AutofacBuilder() { }
         public override NServiceBus.ObjectBuilder.Common.IContainer CreateContainer(NServiceBus.Settings.ReadOnlySettings settings) { }
     }
     [ObsoleteExAttribute(Message="Support for Autofac is provided via the NServiceBus.Extensions.DependencyInjectio" +
-        "n package.", RemoveInVersion="8.0.0", TreatAsErrorFromVersion="7.0.0")]
+        "n package.", RemoveInVersion="9.0.0", TreatAsErrorFromVersion="8.0.0")]
     public class static AutofacExtensions
     {
         public static void ExistingLifetimeScope(this NServiceBus.Container.ContainerCustomizations customizations, Autofac.ILifetimeScope lifetimeScope) { }
