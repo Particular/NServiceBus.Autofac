@@ -37,8 +37,9 @@
             builder.UseTransport<LearningTransport>();
             builder.DisableFeature<TimeoutManager>();
             builder.UsePersistence<InMemoryPersistence>();
+#pragma warning disable 0618
             builder.UseContainer<AutofacBuilder>();
-
+#pragma warning restore 0618
             builder.Recoverability().Immediate(immediateRetries => immediateRetries.NumberOfRetries(0));
             builder.Recoverability().Delayed(delayedRetires => delayedRetires.NumberOfRetries(0));
 
