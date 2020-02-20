@@ -9,7 +9,7 @@ namespace NServiceBus
     /// Autofac Container
     /// </summary>
     [ObsoleteEx(
-          Message = "Support for Autofac is provided via the NServiceBus.Extensions.DependencyInjection package.",
+          Message = "Support for external dependency injection containers is no longer provided by NServiceBus adapters for each container library. Instead, the NServiceBus.Extensions.DependencyInjection library provides the ability to use any container that conforms to the Microsoft.Extensions.DependencyInjection container abstraction.",
           RemoveInVersion = "9.0.0",
           TreatAsErrorFromVersion = "8.0.0")]
     public class AutofacBuilder : ContainerDefinition
