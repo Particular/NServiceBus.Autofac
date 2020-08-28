@@ -9,7 +9,7 @@
     /// Autofac Container
     /// </summary>
     [ObsoleteEx(
-        Message = "NServiceBus.Autofac is no longer supported. Use the externally managed container mode to integrate third party dependency injection containers with NServiceBus instead.",
+        Message = "Autofac is no longer supported via the NServiceBus.Autofac adapter. NServiceBus directly supports all containers compatible with Microsoft.Extensions.DependencyInjection.Abstractions via the externally managed container mode.",
         RemoveInVersion = "9.0.0",
         TreatAsErrorFromVersion = "8.0.0")]
     public class AutofacBuilder
@@ -20,7 +20,7 @@
     /// Autofac extension to pass an existing Autofac container instance.
     /// </summary>
     [ObsoleteEx(
-        Message = "NServiceBus.Autofac is no longer supported. Use the externally managed container mode to integrate third party dependency injection containers with NServiceBus instead.",
+        Message = "Autofac is no longer supported via the NServiceBus.Autofac adapter. NServiceBus directly supports all containers compatible with Microsoft.Extensions.DependencyInjection.Abstractions via the externally managed container mode.",
         RemoveInVersion = "9.0.0",
         TreatAsErrorFromVersion = "8.0.0")]
     public static class AutofacExtensions

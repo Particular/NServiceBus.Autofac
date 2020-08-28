@@ -3,15 +3,11 @@
 [assembly: System.Runtime.InteropServices.ComVisibleAttribute(false)]
 namespace NServiceBus
 {
-    [System.ObsoleteAttribute("NServiceBus.Autofac is no longer supported. Use the externally managed container " +
-        "mode to integrate third party dependency injection containers with NServiceBus i" +
-        "nstead. Will be removed in version 9.0.0.", true)]
+    [System.ObsoleteAttribute(@"Autofac is no longer supported via the NServiceBus.Autofac adapter. NServiceBus directly supports all containers compatible with Microsoft.Extensions.DependencyInjection.Abstractions via the externally managed container mode. Will be removed in version 9.0.0.", true)]
     public class AutofacBuilder
     {
         public AutofacBuilder() { }
     }
-    [System.ObsoleteAttribute("NServiceBus.Autofac is no longer supported. Use the externally managed container " +
-        "mode to integrate third party dependency injection containers with NServiceBus i" +
-        "nstead. Will be removed in version 9.0.0.", true)]
+    [System.ObsoleteAttribute(@"Autofac is no longer supported via the NServiceBus.Autofac adapter. NServiceBus directly supports all containers compatible with Microsoft.Extensions.DependencyInjection.Abstractions via the externally managed container mode. Will be removed in version 9.0.0.", true)]
     public class static AutofacExtensions { }
 }
