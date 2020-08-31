@@ -3,14 +3,11 @@
 [assembly: System.Runtime.InteropServices.ComVisibleAttribute(false)]
 namespace NServiceBus
 {
-    [System.ObsoleteAttribute(@"Support for external dependency injection containers is no longer provided by NServiceBus adapters for each container library. Instead, the NServiceBus.Extensions.DependencyInjection library provides the ability to use any container that conforms to the Microsoft.Extensions.DependencyInjection container abstraction. Will be treated as an error from version 8.0.0. Will be removed in version 9.0.0.", false)]
-    public class AutofacBuilder : NServiceBus.Container.ContainerDefinition
+    [System.ObsoleteAttribute(@"Autofac is no longer supported via the NServiceBus.Autofac adapter. NServiceBus directly supports all containers compatible with Microsoft.Extensions.DependencyInjection.Abstractions via the externally managed container mode. Will be removed in version 9.0.0.", true)]
+    public class AutofacBuilder
     {
         public AutofacBuilder() { }
-        public override NServiceBus.ObjectBuilder.Common.IContainer CreateContainer(NServiceBus.Settings.ReadOnlySettings settings) { }
     }
-    public class static AutofacExtensions
-    {
-        public static void ExistingLifetimeScope(this NServiceBus.Container.ContainerCustomizations customizations, Autofac.ILifetimeScope lifetimeScope) { }
-    }
+    [System.ObsoleteAttribute(@"Autofac is no longer supported via the NServiceBus.Autofac adapter. NServiceBus directly supports all containers compatible with Microsoft.Extensions.DependencyInjection.Abstractions via the externally managed container mode. Will be removed in version 9.0.0.", true)]
+    public class static AutofacExtensions { }
 }
